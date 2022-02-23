@@ -63,12 +63,12 @@ class PendingNavigation extends React.Component<Props, State> {
       // Load data while the old screen remains.
       preload(routes, nextLocation.pathname)
         .then(() => {
-          clientLifecyclesDispatcher.onRouteUpdate({
-            previousLocation: this.previousLocation,
-            location: nextLocation,
-          });
-          // Route has loaded, we can reset previousLocation.
-          this.previousLocation = null;
+          if (this.previousLocation?.pathname !== nextLocation.pathname) {
+            clientLifecyclesDispatcher.onRouteUpdate({
+              previousLocation: this.previousLocation,
+              location: nextLocation,
+            });
+          }
           this.setState({nextRouteHasLoaded: true}, this.stopProgressBar);
           const {hash} = nextLocation;
           if (!hash) {
@@ -92,6 +92,15 @@ class PendingNavigation extends React.Component<Props, State> {
 
     // Route has loaded, we can update now.
     return true;
+  }
+
+  componentDidUpdate() {
+    if (this.previousLocation?.pathname !== this.props.location.pathname) {
+      clientLifecyclesDispatcher.onRouteDidUpdate({
+        previousLocation: this.previousLocation,
+        location: this.props.location,
+      });
+    }
   }
 
   private clearProgressBarTimeout() {

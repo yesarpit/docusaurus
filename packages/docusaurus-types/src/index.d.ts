@@ -455,5 +455,9 @@ export type ClientModule = {
     previousLocation: Location | null;
     location: Location;
   }) => void;
+  onRouteDidUpdate?: (args: {
+    previousLocation: Location | null;
+    location: Location;
+  }) => void;
   onRouteUpdateDelayed?: (args: {location: Location}) => void;
 };
