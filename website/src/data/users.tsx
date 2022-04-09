@@ -204,6 +204,14 @@ const Users: User[] = [
     tags: ['opensource'],
   },
   {
+    title: 'Arpits Blog',
+    description: 'Blog which teaches Javascript along with life lessons via Book Summaries',
+    preview: require('./showcase/yesarpit.png'),
+    website: 'https://yesarpit.github.io/',
+    source: 'https://github.com/yesarpit/yesarpit.github.io',
+    tags: ['opensource','design','personal'],
+  },
+  {
     title: 'Astronomer',
     description:
       'Enterprise-grade framework for Apache Airflow. Production-ready Airflow environments with just a few clicks',
